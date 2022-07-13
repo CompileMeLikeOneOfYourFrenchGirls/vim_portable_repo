@@ -257,5 +257,5 @@ augroup END
 set mouse=a
 set ttymouse=xterm2
 
-" move .viminfo in .vim/viminfo
+" move .viminfo inside .vim/viminfo
 set viminfo+=n~/.vim/viminfo
