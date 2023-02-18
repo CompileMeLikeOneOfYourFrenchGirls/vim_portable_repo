@@ -16,6 +16,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 
 " All of your Plugins must be added before the following line
@@ -255,7 +256,11 @@ augroup END
 
 " enable the mouse to work in split windows
 set mouse=a
-set ttymouse=xterm2
+" set ttymouse=xterm2
 
 " move .viminfo inside .vim/viminfo
 set viminfo+=n~/.vim/viminfo
+
+" set fold method to syntax-based
+set foldmethod=syntax
+set foldnestmax=1
