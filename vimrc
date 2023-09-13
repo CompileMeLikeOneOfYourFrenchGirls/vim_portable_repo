@@ -224,6 +224,16 @@ filetype plugin indent on
 "
 set t_Co=256    " This may or may not be needed
 
+" let g:PaperColor_Theme_Options = {
+"   \ 'theme': {
+"   \  'default.light': {
+"   \  'override': {
+"   \  'color00': ['#eee8d5', '']
+"   \       }
+"   \     }
+"   \   }
+"   \ }
+
 let g:airline_theme='papercolor'
 
 if exists('theme') && theme == 'light' 
@@ -244,8 +254,14 @@ let g:coc_filetype_map = {
 " scrolling
 set scrolloff=10
 
-" show lines in hybrid mode
-set number relativenumber
+" show lines in hybrid mode when \"in focus", absolute mode otherwise
+:set number
+
+:augroup numbertoggle
+: autocmd!
+: autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu | endif
+: autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+:augroup END
 
 set title titlestring=%t
 
