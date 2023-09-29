@@ -12,3 +12,5 @@ This repo contains my portable vim configuration with vimrc but no plugins which
 - Move everything inside ~/.vim/
 
 - Launch vim and write :PlugInstall to install every plugin specified inside vimrc
+
+- Install go autocompletion and help with :CocInstall coc-go
