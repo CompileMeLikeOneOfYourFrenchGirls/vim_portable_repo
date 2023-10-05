@@ -12,3 +12,9 @@ This repo contains my portable vim configuration with vimrc but no plugins which
 - Move everything inside ~/.vim/
 
 - Launch vim and write :PlugInstall to install every plugin specified inside vimrc
+
+## ConquerOfCompletion
+
+:CocInstall coc-pyright
+:CocInstall coc-go
+:CocInstall @yaegassy/coc-ansible
