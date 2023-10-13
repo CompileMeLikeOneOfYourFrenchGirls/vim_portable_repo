@@ -15,6 +15,4 @@ This repo contains my portable vim configuration with vimrc but no plugins which
 
 ## ConquerOfCompletion
 
-:CocInstall coc-pyright
-:CocInstall coc-go
-:CocInstall @yaegassy/coc-ansible
+:CocInstall coc-pyright coc-json coc-go @yaegassy/coc-ansible
