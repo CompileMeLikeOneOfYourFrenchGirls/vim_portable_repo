@@ -1,5 +1,7 @@
 set nocompatible
 set shell=/bin/bash
+" Set encoding, necessary for devicons
+set encoding=UTF-8
 filetype off
 
 "execute pathogen#infect()
@@ -17,6 +19,11 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'ycm-core/YouCompleteMe'
 
 
 " All of your Plugins must be added before the following line
@@ -224,6 +231,16 @@ filetype plugin indent on
 "
 set t_Co=256    " This may or may not be needed
 
+" let g:PaperColor_Theme_Options = {
+"   \ 'theme': {
+"   \  'default.light': {
+"   \  'override': {
+"   \  'color00': ['#eee8d5', '']
+"   \       }
+"   \     }
+"   \   }
+"   \ }
+
 let g:airline_theme='papercolor'
 
 if exists('theme') && theme == 'light' 
@@ -244,8 +261,14 @@ let g:coc_filetype_map = {
 " scrolling
 set scrolloff=10
 
-" show lines in hybrid mode
-set number relativenumber
+" show lines in hybrid mode when \"in focus", absolute mode otherwise
+:set number
+
+:augroup numbertoggle
+: autocmd!
+: autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu | endif
+: autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+:augroup END
 
 set title titlestring=%t
 
@@ -264,3 +287,26 @@ set viminfo+=n~/.vim/viminfo
 " set fold method to syntax-based
 set foldmethod=syntax
 set foldnestmax=1
+
+" Configure nerdtree
+" " Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Custom NERDTree key bindings
+let NERDTreeMapActivateNode='<RIGHT>'
+let NERDTreeMapUpdir='<LEFT>'
+
+" Configure nerdtree plugin devicon
+"
+" Configure nerdtree plugin syntax highlight
+" Disable unmatched folder and file icons having same color as labels
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+
+"Highlight folder using exact match [Disabled]
+"let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+"let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
