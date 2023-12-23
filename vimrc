@@ -74,12 +74,14 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
+"if has("nvim-0.5.0") || has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+  "set signcolumn=yes
+"else
+  "set signcolumn=yes
+"endif
+"ignore version checking and set signcolumn to yes always
+set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -332,3 +334,6 @@ let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 "Highlight folder using exact match [Disabled]
 "let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
 "let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+
+"do NOT show line changes from version control
+let g:airline#extensions#hunks#enabled = 0
